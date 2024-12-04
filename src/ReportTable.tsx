@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import { useRef } from "react";
 import { DownloadTableExcel } from "react-export-table-to-excel";
 import { Result } from "./App";
 
