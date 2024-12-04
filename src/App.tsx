@@ -11,7 +11,7 @@ const listUrl = [
   { name: "Club Store", url: "/club-store" },
   { name: "News Post", url: "/news/post/233200" },
   { name: "Subscription", url: "/subscription" },
-  { name: "Web Coin Shop", url: "/web-coin-shop" },
+  { name: "Web Coin Shop", url: "/web-coin" },
   { name: "Trivia Rumble", url: "/trivia-rumble" },
   { name: "Player Profile", url: "/player/ALICE361" },
   { name: "Play Game", url: "/play-game" },
