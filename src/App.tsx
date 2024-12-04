@@ -8,7 +8,7 @@ const listUrl = [
   { name: "Fan Voting", url: "/fan-voting" },
   { name: "Tutorial", url: "/tutorial" },
   { name: "Club Store", url: "/club-store" },
-  { name: "News Post", url: "/news/post/[slug]" },
+  { name: "News Post", url: "/news/post/233200" },
   { name: "Subscription", url: "/subscription" },
   { name: "Web Coin Shop", url: "/web-coin-shop" },
   { name: "Trivia Rumble", url: "/trivia-rumble" },
@@ -26,6 +26,7 @@ const apiKey = "AIzaSyA0eHyvXq--iCks45skeN0zwGPSNVUMTB0";
 
 function App() {
   const [env, setEnv] = useState("dev");
+  const [mode, setMode] = useState("mobile");
   const [loadingStates, setLoadingStates] = useState([
     { loading: false },
     { loading: false },
@@ -97,6 +98,16 @@ function App() {
           ))}
         </select>
       </div>
+      <div>
+        <label htmlFor="env-select">Select Mode: </label>
+        <select value={mode} onChange={(e) => setMode(e.target.value)}>
+          {["mobile", "desktop"].map((envOption) => (
+            <option key={envOption} value={envOption}>
+              {envOption}
+            </option>
+          ))}
+        </select>
+      </div>
       <ol type="1">
         {listUrl.map((item, index) => {
           const url = `https://${env}.wwechampions.com${item.url}`;
@@ -112,7 +123,9 @@ function App() {
                 {item.name} : {url}
               </a>
               {loadingStates[index].loading ? (
-                <span style={{ marginLeft: "10px" }}>Loading...</span>
+                <span style={{ marginLeft: "10px", color: "darkblue" }}>
+                  Loading...
+                </span>
               ) : (
                 <button
                   style={{ marginLeft: "10px" }}
@@ -123,7 +136,7 @@ function App() {
                       return newLoadingStates;
                     });
                     fetch(
-                      `https://www.googleapis.com/pagespeedonline/v5/runPagespeed?url=${url}&key=${apiKey}`
+                      `https://www.googleapis.com/pagespeedonline/v5/runPagespeed?url=${url}&key=${apiKey}&strategy=${mode}`
                     )
                       .then((response) => response.json())
                       .then((data) => {
@@ -166,48 +179,61 @@ function App() {
                 </button>
               )}
               <br />
-              {results[index]?.result && (
-                <div style={{ display: "flex", gap: 10, color: "#fff" }}>
-                  <div style={{ backgroundColor: "#1A1A1D", padding: 5 }}>
-                    CLS: {results[index]?.result?.cls}
-                  </div>
-                  <div
-                    style={{
-                      backgroundColor: "#3B1C32",
-                      padding: 5,
-                      borderRadius: 5
-                    }}
-                  >
-                    FCP: {results[index]?.result?.fcp}
-                  </div>
-                  <div
-                    style={{
-                      backgroundColor: "#6A1E55",
-                      padding: 5,
-                      borderRadius: 5
-                    }}
-                  >
-                    TBT: {results[index]?.result?.tbt}
-                  </div>
-                  <div
-                    style={{
-                      backgroundColor: "#A64D79",
-                      padding: 5,
-                      borderRadius: 5
-                    }}
-                  >
-                    LCP: {results[index]?.result?.lcp}
-                  </div>
-                  <div
-                    style={{
-                      backgroundColor: "#D91656",
-                      padding: 5,
-                      borderRadius: 5
-                    }}
-                  >
-                    Total Score: {results[index]?.result.totalScore}
-                  </div>
+              {loadingStates[index].loading ? (
+                <div
+                  style={{
+                    backgroundColor: "#D91656",
+                    padding: 5,
+                    borderRadius: 5,
+                    width: 200
+                  }}
+                >
+                  Calculating..
                 </div>
+              ) : (
+                results[index]?.result && (
+                  <div style={{ display: "flex", gap: 10, color: "#fff" }}>
+                    <div style={{ backgroundColor: "#1A1A1D", padding: 5 }}>
+                      CLS: {results[index]?.result?.cls}
+                    </div>
+                    <div
+                      style={{
+                        backgroundColor: "#3B1C32",
+                        padding: 5,
+                        borderRadius: 5
+                      }}
+                    >
+                      FCP: {results[index]?.result?.fcp}
+                    </div>
+                    <div
+                      style={{
+                        backgroundColor: "#6A1E55",
+                        padding: 5,
+                        borderRadius: 5
+                      }}
+                    >
+                      TBT: {results[index]?.result?.tbt}
+                    </div>
+                    <div
+                      style={{
+                        backgroundColor: "#A64D79",
+                        padding: 5,
+                        borderRadius: 5
+                      }}
+                    >
+                      LCP: {results[index]?.result?.lcp}
+                    </div>
+                    <div
+                      style={{
+                        backgroundColor: "#D91656",
+                        padding: 5,
+                        borderRadius: 5
+                      }}
+                    >
+                      Total Score: {results[index]?.result.totalScore}
+                    </div>
+                  </div>
+                )
               )}
             </li>
           );
