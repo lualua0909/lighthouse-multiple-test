@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { ReportTable } from "./ReportTable";
 
 const listUrl = [
   { name: "Dashboard", url: "/" },
@@ -23,6 +24,13 @@ const listUrl = [
 ];
 
 const apiKey = "AIzaSyA0eHyvXq--iCks45skeN0zwGPSNVUMTB0";
+export interface Result {
+  cls: string;
+  fcp: string;
+  tbt: string;
+  lcp: string;
+  totalScore: number;
+}
 
 function App() {
   const [env, setEnv] = useState("dev");
@@ -48,14 +56,6 @@ function App() {
     { loading: false },
     { loading: false }
   ]);
-
-  interface Result {
-    cls: string;
-    fcp: string;
-    tbt: string;
-    lcp: string;
-    totalScore: number;
-  }
 
   const [results, setResults] = useState<
     { name: string; result: Result | null }[]
@@ -151,7 +151,6 @@ function App() {
                           lighthouseResult.audits["largest-contentful-paint"];
                         const totalScore =
                           lighthouseResult.categories.performance.score * 100;
-
                         const result = {
                           cls: cls.displayValue,
                           fcp: fcp.displayValue,
@@ -239,6 +238,7 @@ function App() {
           );
         })}
       </ol>
+      <ReportTable data={results} />
     </>
   );
 }
