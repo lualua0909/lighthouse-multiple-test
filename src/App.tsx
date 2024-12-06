@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { ReportTable } from "./ReportTable";
+import bgImg from "./assets/chameleon-bg.jpg";
+import "./App.css";
 
 const listUrl = [
   { name: "Dashboard", url: "/" },
@@ -83,7 +85,10 @@ function App() {
 
   return (
     <>
-      Pagespeed insight
+      <div className="cardImg">
+        <img src={bgImg} alt="WWE Champions" />
+      </div>
+      <div className="tag">Lighthouse Test</div>
       <div>
         <label htmlFor="env-select">Select Environment: </label>
         <select
