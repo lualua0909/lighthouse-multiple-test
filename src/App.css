@@ -105,17 +105,16 @@ td {
   overflow: hidden;
   position: relative;
   margin: 4em auto;
-  right: 200px;
   animation: moveTo 10s;
   animation-fill-mode: forwards;
 }
 
 @keyframes moveTo {
   0% {
-    right: 200px;
+    left: calc(1px * var(--dataX));
   }
   100% {
-    right: 10px;
+    left: calc(1px * var(--dataY));
   }
 }
 
@@ -151,4 +150,10 @@ td {
   to {
     transform: translate3d(-100%, 0, 0);
   }
+}
+
+.button-active {
+  background-color: #f44336;
+  color: white;
+  box-shadow: 0 5px #666;
 }

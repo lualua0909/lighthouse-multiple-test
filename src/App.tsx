@@ -1,7 +1,12 @@
-import { useState } from "react";
+import { useState, CSSProperties } from "react";
 import { ReportTable } from "./ReportTable";
 import bgImg from "./assets/chameleon-bg.jpg";
 import "./App.css";
+
+export interface MyCustomCSS extends CSSProperties {
+  "--dataX": number;
+  "--dataY": number;
+}
 
 const listUrl = [
   { name: "Dashboard", url: "/" },
@@ -34,9 +39,15 @@ export interface Result {
   totalScore: number;
 }
 
+const INIT_POSITION = -500;
+const STEP_PX = 300;
+
 function App() {
   const [env, setEnv] = useState("dev");
   const [mode, setMode] = useState("mobile");
+  const [characterDirection, setCharacterDirection] = useState("face-right");
+  const [positionX, setPositionX] = useState(INIT_POSITION);
+  const [positionXDes, setPositionXDes] = useState(INIT_POSITION + STEP_PX);
   const [loadingStates, setLoadingStates] = useState([
     { loading: false },
     { loading: false },
@@ -58,6 +69,15 @@ function App() {
     { loading: false },
     { loading: false }
   ]);
+
+  const shake = () => {
+    const box = document.getElementById("Character");
+    if (box) {
+      box.style.animationName = "";
+      box.style.animationName = "moveTo";
+      box.style.animationDuration = "10s";
+    }
+  };
 
   const [results, setResults] = useState<
     { name: string; result: Result | null }[]
@@ -104,18 +124,89 @@ function App() {
           ></img>
         </div>
       </div> */}
-      <div className="Character">
-        <img
-          className="Character_shadow pixelart"
-          src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/21542/DemoRpgCharacterShadow.png"
-          alt="Shadow"
-        />
+      <div
+        style={{
+          backgroundColor: "lightblue",
+          position: "relative",
+          width: "100vw"
+        }}
+      >
+        <div
+          id="Character"
+          className={`Character`}
+          style={
+            {
+              "--dataX": positionX,
+              "--dataY": positionXDes
+            } as MyCustomCSS
+          }
+        >
+          <img
+            className="Character_shadow pixelart"
+            src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/21542/DemoRpgCharacterShadow.png"
+            alt="Shadow"
+          />
 
-        <img
-          className="Character_spritesheet pixelart face-right"
-          src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/21542/DemoRpgCharacter.png"
-          alt="Character"
-        />
+          <img
+            className={`Character_spritesheet pixelart ${characterDirection}`}
+            src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/21542/DemoRpgCharacter.png"
+            alt="Character"
+          />
+        </div>
+      </div>
+      <div
+        style={{
+          display: "flex",
+          gap: 10,
+          justifyContent: "center",
+          marginBottom: 10
+        }}
+      >
+        <button
+          className={`${
+            characterDirection === "face-left" ? "button-active" : ""
+          }`}
+          onClick={() => {
+            setCharacterDirection("face-left");
+            const oldPos = positionXDes;
+            setPositionX(oldPos);
+            setPositionXDes(oldPos - STEP_PX);
+            shake();
+          }}
+        >
+          Left
+        </button>
+        <button
+          className={`${
+            characterDirection === "face-right" ? "button-active" : ""
+          }`}
+          onClick={() => {
+            setCharacterDirection("face-right");
+            const oldPos = positionXDes;
+            setPositionX(oldPos);
+            setPositionXDes(oldPos + STEP_PX);
+          }}
+        >
+          Right
+        </button>
+        <button
+          className={`${
+            characterDirection === "face-up" ? "button-active" : ""
+          }`}
+          onClick={() => {
+            setCharacterDirection("face-up");
+          }}
+        >
+          Up
+        </button>
+        <button
+          className={`${characterDirection === "" ? "button-active" : ""}`}
+          onClick={() => {
+            setCharacterDirection("");
+          }}
+        >
+          Down
+        </button>
       </div>
       <div>
         <label htmlFor="env-select">Select Environment: </label>
