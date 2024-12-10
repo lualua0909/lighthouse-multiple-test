@@ -125,10 +125,11 @@ function App() {
         </div>
       </div> */}
       <div
+        id="animatedBackground"
         style={{
-          backgroundColor: "lightblue",
           position: "relative",
-          width: "100vw"
+          width: "100vw",
+          height: 250
         }}
       >
         <div
