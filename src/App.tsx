@@ -89,6 +89,34 @@ function App() {
         <img src={bgImg} alt="WWE Champions" />
       </div>
       <div className="tag">Lighthouse Test</div>
+      {/* <div
+        style={{
+          backgroundColor: "black",
+          width: "fit-content"
+        }}
+      >
+        <div className="mask1">
+          <img
+            src="https://www.w3schools.com/css/img_5terre.jpg"
+            alt="Cinque Terre"
+            width="600"
+            height="400"
+          ></img>
+        </div>
+      </div> */}
+      <div className="Character">
+        <img
+          className="Character_shadow pixelart"
+          src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/21542/DemoRpgCharacterShadow.png"
+          alt="Shadow"
+        />
+
+        <img
+          className="Character_spritesheet pixelart face-right"
+          src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/21542/DemoRpgCharacter.png"
+          alt="Character"
+        />
+      </div>
       <div>
         <label htmlFor="env-select">Select Environment: </label>
         <select

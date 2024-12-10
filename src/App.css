@@ -25,6 +25,11 @@ td {
     border-radius: 30% 70% 70% 30% / 30% 36% 64% 70%;
     border: 8px solid darkslategrey;
     animation: changeBorder 15s infinite;
+
+    -webkit-mask-image: url(/mask-img.gif);
+    mask-image: url(/mask-img.gif);
+    mask-size: 100% 100%;
+    mask-repeat: no-repeat;
   }
 }
 
@@ -78,5 +83,72 @@ td {
   }
   50% {
     border-color: orange;
+  }
+}
+
+.mask1 {
+  width: 600px;
+  height: 400px;
+  -webkit-mask-image: url(/mask-img.gif);
+  mask-image: url(/mask-img.gif);
+  mask-size: 100% 100%;
+  mask-repeat: no-repeat;
+}
+
+:root {
+  --pixel-size: 6;
+}
+
+.Character {
+  width: calc(32px * var(--pixel-size));
+  height: calc(32px * var(--pixel-size));
+  overflow: hidden;
+  position: relative;
+  margin: 4em auto;
+  right: 200px;
+  animation: moveTo 10s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes moveTo {
+  0% {
+    right: 200px;
+  }
+  100% {
+    right: 10px;
+  }
+}
+
+.Character_spritesheet {
+  animation: moveSpritesheet 1s steps(4) infinite;
+  width: calc(128px * var(--pixel-size));
+  position: absolute;
+}
+.Character_shadow {
+  position: absolute;
+  width: calc(32px * var(--pixel-size));
+  height: calc(32px * var(--pixel-size));
+}
+
+.pixelart {
+  image-rendering: pixelated;
+}
+
+.face-right {
+  top: calc(-32px * var(--pixel-size));
+}
+.face-up {
+  top: calc(-64px * var(--pixel-size));
+}
+.face-left {
+  top: calc(-96px * var(--pixel-size));
+}
+
+@keyframes moveSpritesheet {
+  from {
+    transform: translate3d(0px, 0, 0);
+  }
+  to {
+    transform: translate3d(-100%, 0, 0);
   }
 }
