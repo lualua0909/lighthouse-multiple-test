@@ -107,33 +107,37 @@ function App() {
   function endGoto() {
     clearInterval(counter);
   }
+  const splineRef = useRef();
+  const chair = useRef();
 
   const onSplineMouseDown = (e: SplineEvent) => {
-    alert("onSplineMouseDown" + e.target.name);
+    const obj = splineRef.current.findObjectByName(e.target.name)
   };
+
+  function onLoad(spline) {
+    const obj = spline.findObjectByName('chair');
+    chair.current = obj;
+    splineRef.current = spline;
+  }
+
+  function moveObj() {
+    // cube.current.position.x += 10;
+  }
 
   return (
     <>
-      <div className="cardImg">
-        <img src={bgImg} alt="WWE Champions" />
+      <div style={{ position: 'relative' }}>
+        <Spline
+          scene="https://prod.spline.design/Gvxxn24r0nXLwYfY/scene.splinecode"
+          style={{ padding: 0, pointerEvents: 'auto' }}
+        />
       </div>
-      <div className="tag">Lighthouse Test</div>
-      {/* <div
-        style={{
-          backgroundColor: "black",
-          width: "fit-content"
-        }}
-      >
-        <div className="mask1">
-          <img
-            src="https://www.w3schools.com/css/img_5terre.jpg"
-            alt="Cinque Terre"
-            width="600"
-            height="400"
-          ></img>
-        </div>
+      <div className="tag" style={{ position: 'absolute', zIndex: 9999, top: '50%', left: '60%' }}>Lighthouse Test</div>
+      {/* <div className="cardImg">
+        <img src={bgImg} alt="WWE Champions" />
       </div> */}
-      <div
+
+      {/* <div
         id="animatedBackground"
         style={{
           position: "relative",
@@ -163,14 +167,8 @@ function App() {
             alt="Character"
           />
         </div>
-      </div>
-      <Spline
-        scene="https://prod.spline.design/aLXltjgQ14kvEgls/scene.splinecode"
-        onSplineMouseDown={onSplineMouseDown}
-        onSplineMouseHover={onSplineMouseDown}
-      />
-
-      <div
+      </div> */}
+      {/* <div
         style={{
           display: "flex",
           gap: 10,
@@ -179,9 +177,8 @@ function App() {
         }}
       >
         <button
-          className={`${
-            characterDirection === "face-left" ? "button-active" : ""
-          }`}
+          className={`${characterDirection === "face-left" ? "button-active" : ""
+            }`}
           onMouseDown={startGoto}
           onMouseUp={endGoto}
           onClick={startGoto}
@@ -189,9 +186,8 @@ function App() {
           Left
         </button>
         <button
-          className={`${
-            characterDirection === "face-right" ? "button-active" : ""
-          }`}
+          className={`${characterDirection === "face-right" ? "button-active" : ""
+            }`}
           onClick={() => {
             setCharacterDirection("face-right");
             const oldPos = positionXDes;
@@ -202,9 +198,8 @@ function App() {
           Right
         </button>
         <button
-          className={`${
-            characterDirection === "face-up" ? "button-active" : ""
-          }`}
+          className={`${characterDirection === "face-up" ? "button-active" : ""
+            }`}
           onClick={() => {
             setCharacterDirection("face-up");
           }}
@@ -219,7 +214,23 @@ function App() {
         >
           Down
         </button>
-      </div>
+      </div> */}
+{/* 
+      <Spline
+        ref={splineRef}
+        scene="https://prod.spline.design/aLXltjgQ14kvEgls/scene.splinecode"
+        onSplineMouseHover={onSplineMouseDown}
+        onLoad={onLoad}
+        style={{ position: 'absolute', top: 0, width: 320, height: 500, padding: 0 }}
+      /> */}
+      <Spline
+        scene="https://prod.spline.design/Ly-ycCAmYCyStPfo/scene.splinecode"
+        style={{ position: 'absolute', top: 500, right: 0, width: 100, height: 200, padding: 0 }}
+      />
+
+
+
+
       <div>
         <label htmlFor="env-select">Select Environment: </label>
         <select
