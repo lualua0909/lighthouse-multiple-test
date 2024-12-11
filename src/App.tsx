@@ -1,7 +1,7 @@
 import { useState, CSSProperties, useRef } from "react";
 import { ReportTable } from "./ReportTable";
-import bgImg from "./assets/chameleon-bg.jpg";
-import Spline, { SplineEvent } from "@splinetool/react-spline";
+// import bgImg from "./assets/chameleon-bg.jpg";
+import Spline from "@splinetool/react-spline";
 
 import "./App.css";
 
@@ -41,15 +41,15 @@ export interface Result {
   totalScore: number;
 }
 
-const INIT_POSITION = -500;
-const STEP_PX = 30;
+// const INIT_POSITION = -500;
+// const STEP_PX = 30;
 
 function App() {
   const [env, setEnv] = useState("dev");
   const [mode, setMode] = useState("mobile");
-  const [characterDirection, setCharacterDirection] = useState("face-right");
-  const [positionX, setPositionX] = useState(INIT_POSITION);
-  const [positionXDes, setPositionXDes] = useState(INIT_POSITION + STEP_PX);
+  // const [characterDirection, setCharacterDirection] = useState("face-right");
+  // const [positionX, setPositionX] = useState(INIT_POSITION);
+  // const [positionXDes, setPositionXDes] = useState(INIT_POSITION + STEP_PX);
   const [loadingStates, setLoadingStates] = useState([
     { loading: false },
     { loading: false },
@@ -96,33 +96,33 @@ function App() {
     { name: "Tournament", result: null }
   ]);
 
-  let counter: number | undefined;
+  // let counter: number | undefined;
 
-  function startGoto() {
-    setCharacterDirection("face-left");
-    const oldPos = positionXDes;
-    setPositionX((prev) => oldPos);
-    setPositionXDes((prev) => oldPos - STEP_PX);
-  }
-  function endGoto() {
-    clearInterval(counter);
-  }
-  const splineRef = useRef();
+  // function startGoto() {
+  //   setCharacterDirection("face-left");
+  //   const oldPos = positionXDes;
+  //   setPositionX((prev) => oldPos);
+  //   setPositionXDes((prev) => oldPos - STEP_PX);
+  // }
+  // function endGoto() {
+  //   clearInterval(counter);
+  // }
+  const splineRef: any = useRef();
   const chair = useRef();
 
-  const onSplineMouseDown = (e: SplineEvent) => {
-    const obj = splineRef.current.findObjectByName(e.target.name)
-  };
+  // const onSplineMouseDown = (e: SplineEvent) => {
+  //   const obj = splineRef.current.findObjectByName(e.target.name)
+  // };
 
-  function onLoad(spline) {
+  function onLoad(spline: any) {
     const obj = spline.findObjectByName('chair');
     chair.current = obj;
     splineRef.current = spline;
   }
 
-  function moveObj() {
-    // cube.current.position.x += 10;
-  }
+  // function moveObj() {
+  //   cube.current.position.x += 10;
+  // }
 
   return (
     <>
@@ -215,21 +215,18 @@ function App() {
           Down
         </button>
       </div> */}
-{/* 
+
       <Spline
         ref={splineRef}
         scene="https://prod.spline.design/aLXltjgQ14kvEgls/scene.splinecode"
-        onSplineMouseHover={onSplineMouseDown}
+        // onSplineMouseHover={onSplineMouseDown}
         onLoad={onLoad}
         style={{ position: 'absolute', top: 0, width: 320, height: 500, padding: 0 }}
-      /> */}
+      />
       <Spline
         scene="https://prod.spline.design/Ly-ycCAmYCyStPfo/scene.splinecode"
         style={{ position: 'absolute', top: 500, right: 0, width: 100, height: 200, padding: 0 }}
       />
-
-
-
 
       <div>
         <label htmlFor="env-select">Select Environment: </label>
