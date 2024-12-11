@@ -1,6 +1,8 @@
-import { useState, CSSProperties } from "react";
+import { useState, CSSProperties, useRef } from "react";
 import { ReportTable } from "./ReportTable";
 import bgImg from "./assets/chameleon-bg.jpg";
+import Spline, { SplineEvent } from "@splinetool/react-spline";
+
 import "./App.css";
 
 export interface MyCustomCSS extends CSSProperties {
@@ -40,7 +42,7 @@ export interface Result {
 }
 
 const INIT_POSITION = -500;
-const STEP_PX = 300;
+const STEP_PX = 30;
 
 function App() {
   const [env, setEnv] = useState("dev");
@@ -70,15 +72,6 @@ function App() {
     { loading: false }
   ]);
 
-  const shake = () => {
-    const box = document.getElementById("Character");
-    if (box) {
-      box.style.animationName = "";
-      box.style.animationName = "moveTo";
-      box.style.animationDuration = "10s";
-    }
-  };
-
   const [results, setResults] = useState<
     { name: string; result: Result | null }[]
   >([
@@ -102,6 +95,22 @@ function App() {
     { name: "Leaderboard", result: null },
     { name: "Tournament", result: null }
   ]);
+
+  let counter: number | undefined;
+
+  function startGoto() {
+    setCharacterDirection("face-left");
+    const oldPos = positionXDes;
+    setPositionX((prev) => oldPos);
+    setPositionXDes((prev) => oldPos - STEP_PX);
+  }
+  function endGoto() {
+    clearInterval(counter);
+  }
+
+  const onSplineMouseDown = (e: SplineEvent) => {
+    alert("onSplineMouseDown" + e.target.name);
+  };
 
   return (
     <>
@@ -155,6 +164,12 @@ function App() {
           />
         </div>
       </div>
+      <Spline
+        scene="https://prod.spline.design/aLXltjgQ14kvEgls/scene.splinecode"
+        onSplineMouseDown={onSplineMouseDown}
+        onSplineMouseHover={onSplineMouseDown}
+      />
+
       <div
         style={{
           display: "flex",
@@ -167,13 +182,9 @@ function App() {
           className={`${
             characterDirection === "face-left" ? "button-active" : ""
           }`}
-          onClick={() => {
-            setCharacterDirection("face-left");
-            const oldPos = positionXDes;
-            setPositionX(oldPos);
-            setPositionXDes(oldPos - STEP_PX);
-            shake();
-          }}
+          onMouseDown={startGoto}
+          onMouseUp={endGoto}
+          onClick={startGoto}
         >
           Left
         </button>
