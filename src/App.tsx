@@ -1,14 +1,6 @@
-import { useState, CSSProperties, useRef } from "react";
+import { useState } from "react";
 import { ReportTable } from "./ReportTable";
-// import bgImg from "./assets/chameleon-bg.jpg";
-import Spline from "@splinetool/react-spline";
-
 import "./App.css";
-
-export interface MyCustomCSS extends CSSProperties {
-  "--dataX": number;
-  "--dataY": number;
-}
 
 const listUrl = [
   { name: "Dashboard", url: "/" },
@@ -41,15 +33,9 @@ export interface Result {
   totalScore: number;
 }
 
-// const INIT_POSITION = -500;
-// const STEP_PX = 30;
-
 function App() {
   const [env, setEnv] = useState("dev");
   const [mode, setMode] = useState("mobile");
-  // const [characterDirection, setCharacterDirection] = useState("face-right");
-  // const [positionX, setPositionX] = useState(INIT_POSITION);
-  // const [positionXDes, setPositionXDes] = useState(INIT_POSITION + STEP_PX);
   const [loadingStates, setLoadingStates] = useState([
     { loading: false },
     { loading: false },
@@ -96,140 +82,10 @@ function App() {
     { name: "Tournament", result: null }
   ]);
 
-  // let counter: number | undefined;
-
-  // function startGoto() {
-  //   setCharacterDirection("face-left");
-  //   const oldPos = positionXDes;
-  //   setPositionX((prev) => oldPos);
-  //   setPositionXDes((prev) => oldPos - STEP_PX);
-  // }
-  // function endGoto() {
-  //   clearInterval(counter);
-  // }
-  const splineRef: any = useRef();
-  const chair = useRef();
-
-  // const onSplineMouseDown = (e: SplineEvent) => {
-  //   const obj = splineRef.current.findObjectByName(e.target.name)
-  // };
-
-  function onLoad(spline: any) {
-    const obj = spline.findObjectByName('chair');
-    chair.current = obj;
-    splineRef.current = spline;
-  }
-
-  // function moveObj() {
-  //   cube.current.position.x += 10;
-  // }
-
   return (
     <>
-      <div style={{ position: 'relative' }}>
-        <Spline
-          scene="https://prod.spline.design/Gvxxn24r0nXLwYfY/scene.splinecode"
-          style={{ padding: 0, pointerEvents: 'auto' }}
-        />
-      </div>
-      <div className="tag" style={{ position: 'absolute', zIndex: 9999, top: '50%', left: '60%' }}>Lighthouse Test</div>
-      {/* <div className="cardImg">
-        <img src={bgImg} alt="WWE Champions" />
-      </div> */}
-
-      {/* <div
-        id="animatedBackground"
-        style={{
-          position: "relative",
-          width: "100vw",
-          height: 250
-        }}
-      >
-        <div
-          id="Character"
-          className={`Character`}
-          style={
-            {
-              "--dataX": positionX,
-              "--dataY": positionXDes
-            } as MyCustomCSS
-          }
-        >
-          <img
-            className="Character_shadow pixelart"
-            src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/21542/DemoRpgCharacterShadow.png"
-            alt="Shadow"
-          />
-
-          <img
-            className={`Character_spritesheet pixelart ${characterDirection}`}
-            src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/21542/DemoRpgCharacter.png"
-            alt="Character"
-          />
-        </div>
-      </div> */}
-      {/* <div
-        style={{
-          display: "flex",
-          gap: 10,
-          justifyContent: "center",
-          marginBottom: 10
-        }}
-      >
-        <button
-          className={`${characterDirection === "face-left" ? "button-active" : ""
-            }`}
-          onMouseDown={startGoto}
-          onMouseUp={endGoto}
-          onClick={startGoto}
-        >
-          Left
-        </button>
-        <button
-          className={`${characterDirection === "face-right" ? "button-active" : ""
-            }`}
-          onClick={() => {
-            setCharacterDirection("face-right");
-            const oldPos = positionXDes;
-            setPositionX(oldPos);
-            setPositionXDes(oldPos + STEP_PX);
-          }}
-        >
-          Right
-        </button>
-        <button
-          className={`${characterDirection === "face-up" ? "button-active" : ""
-            }`}
-          onClick={() => {
-            setCharacterDirection("face-up");
-          }}
-        >
-          Up
-        </button>
-        <button
-          className={`${characterDirection === "" ? "button-active" : ""}`}
-          onClick={() => {
-            setCharacterDirection("");
-          }}
-        >
-          Down
-        </button>
-      </div> */}
-
-      <Spline
-        ref={splineRef}
-        scene="https://prod.spline.design/aLXltjgQ14kvEgls/scene.splinecode"
-        // onSplineMouseHover={onSplineMouseDown}
-        onLoad={onLoad}
-        style={{ position: 'absolute', top: 0, width: 320, height: 500, padding: 0 }}
-      />
-      <Spline
-        scene="https://prod.spline.design/Ly-ycCAmYCyStPfo/scene.splinecode"
-        style={{ position: 'absolute', top: 500, right: 0, width: 100, height: 200, padding: 0 }}
-      />
-
       <div>
-        <label htmlFor="env-select">Select Environment: </label>
+        <label htmlFor="env-select" className="mr-10 text-lg font-bold">Select Environment: </label>
         <select
           id="env-select"
           value={env}

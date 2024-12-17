@@ -1,0 +1,40 @@
+.cardImg {
+    position: relative;
+    width: fit-content;
+
+    img {
+        width: 100%;
+        height: auto;
+        border-radius: 30% 70% 70% 30% / 30% 36% 64% 70%;
+        border: 8px solid darkslategrey;
+        animation: changeBorder 15s;
+        animation-iteration-count: 1;
+
+        -webkit-mask-image: url(/mask-img.gif);
+        mask-image: url(/mask-img.gif);
+        mask-size: 100% 100%;
+        mask-repeat: no-repeat;
+    }
+}
+
+@keyframes changeBorder {
+    0% {
+        border-radius: 30% 70% 70% 30% / 30% 36% 64% 70%;
+    }
+
+    25% {
+        border-radius: 70% 30% 30% 70% / 30% 36% 64% 70%;
+    }
+
+    50% {
+        border-radius: 30% 70% 70% 30% / 70% 30% 70% 30%;
+    }
+
+    75% {
+        border-radius: 70% 30% 30% 70% / 70% 30% 70% 30%;
+    }
+
+    100% {
+        border-radius: 30% 70% 70% 30% / 30% 36% 64% 70%;
+    }
+}

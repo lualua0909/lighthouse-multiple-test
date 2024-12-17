@@ -1,0 +1,89 @@
+.Character {
+    width: calc(32px * var(--pixel-size));
+    height: calc(32px * var(--pixel-size));
+    overflow: hidden;
+    position: relative;
+    margin: 4em auto;
+    animation: moveTo 10s;
+    animation-fill-mode: forwards;
+}
+
+@keyframes moveTo {
+    0% {
+        left: calc(1px * var(--dataX));
+    }
+
+    100% {
+        left: calc(1px * var(--dataY));
+    }
+}
+
+.Character_spritesheet {
+    animation: moveSpritesheet 1s steps(4) infinite;
+    min-width: calc(128px * var(--pixel-size));
+    position: absolute;
+}
+
+.Character_shadow {
+    position: absolute;
+    width: calc(32px * var(--pixel-size));
+    height: calc(32px * var(--pixel-size));
+}
+
+.pixelart {
+    image-rendering: pixelated;
+}
+
+.face-right {
+    top: calc(-32px * var(--pixel-size));
+}
+
+.face-up {
+    top: calc(-64px * var(--pixel-size));
+}
+
+.face-left {
+    top: calc(-96px * var(--pixel-size));
+}
+
+@keyframes moveSpritesheet {
+    from {
+        transform: translate3d(0px, 0, 0);
+    }
+
+    to {
+        transform: translate3d(-100%, 0, 0);
+    }
+}
+
+.button-active {
+    background-color: #f44336;
+    color: white;
+    box-shadow: 0 5px #666;
+}
+
+#animatedBackground {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: url("https://t3.ftcdn.net/jpg/00/88/98/18/360_F_88981880_YjJManMJ6hJmKr5CZteFJAkEzXIh8mxW.jpg");
+    background-repeat: repeat;
+    background-position: 0 0;
+    background-size: auto 100%;
+    /*adjust s value for speed*/
+    animation: animatedBackground 500s linear infinite;
+}
+
+
+@keyframes animatedBackground {
+    from {
+        background-position: 0 0;
+    }
+
+    /*use negative width if you want it to flow right to left else and positive for left to right*/
+    to {
+        background-position: -10000px 0;
+    }
+}
