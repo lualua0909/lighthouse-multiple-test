@@ -2,11 +2,12 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { BrowserRouter, Route, Routes } from "react-router";
 import App from "./App.tsx";
-import './global.css'
+import "./global.css";
 import Render3D from "./pages/Render3D/index.tsx";
 import GameAnimation from "./pages/GameAnimation/index.tsx";
 import BackgroundCurve from "./pages/BackgroundCurve/index.tsx";
-import { NavBar } from "./components/nav-bar.tsx";
+import { NavBar } from "./components/nav-bar";
+import Acernity from "./pages/Acernity";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
@@ -17,6 +18,7 @@ createRoot(document.getElementById("root")!).render(
           <Route path="render-3d" element={<Render3D />} />
           <Route path="game-animation" element={<GameAnimation />} />
           <Route path="bg-curve" element={<BackgroundCurve />} />
+          <Route path="acernity" element={<Acernity />} />
         </Route>
       </Routes>
     </BrowserRouter>
