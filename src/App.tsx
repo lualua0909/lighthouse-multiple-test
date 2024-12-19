@@ -85,7 +85,19 @@ function App() {
   return (
     <>
       <div>
-        <label htmlFor="env-select" className="mr-10 text-lg font-bold">Select Environment: </label>
+        <svg
+          stroke="#bac736"
+          stroke-width="2"
+          className="text-line"
+          width="100%"
+        >
+          <text x="50%" dominant-baseline="middle" text-anchor="middle" y="50%">
+            LIGHT HOUSE REPORT
+          </text>
+        </svg>
+        <label htmlFor="env-select" className="mr-10 text-lg font-bold">
+          Select Environment:{" "}
+        </label>
         <select
           id="env-select"
           value={env}
