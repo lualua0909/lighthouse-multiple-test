@@ -43,6 +43,12 @@ export const NavBar = () => {
                   >
                     Acernity
                   </a>
+                  <a
+                    href="parallax"
+                    className="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
+                  >
+                    Parallax
+                  </a>
                 </div>
               </div>
             </div>
