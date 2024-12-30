@@ -1,19 +1,40 @@
 import { Parallax, ParallaxLayer } from "@react-spring/parallax";
 import styles from "./style.module.css";
+import imgBg from "../../assets/header-chat-2.png";
 
 export default function ParallaxPage() {
   const alignCenter = { display: "flex", alignItems: "center" };
   return (
-    <div>
+    <div className="overflow-hidden">
       <div className={styles.background} />
 
-      <Parallax pages={5}>
+      <Parallax pages={5} className="overflow-hidden">
         <ParallaxLayer
           offset={0}
-          speed={0.5}
-          style={{ ...alignCenter, justifyContent: "center" }}
+          speed={1}
+          style={{
+            ...alignCenter,
+            justifyContent: "center",
+            borderBottom: "1px solid white"
+          }}
         >
-          <p className={styles.scrollText}>Scroll down</p>
+          <img
+            src={imgBg}
+            alt="arrow"
+            className="w-screen h-[300px] absolute bottom-[60px]"
+          />
+        </ParallaxLayer>
+        <ParallaxLayer
+          offset={0}
+          speed={0.1}
+          style={{
+            ...alignCenter,
+            justifyContent: "center",
+            zIndex: -1
+            // backgroundColor: "white"
+          }}
+        >
+          <span className="font-bold text-5xl absolute z-0">Scroll down</span>
         </ParallaxLayer>
 
         <ParallaxLayer
