@@ -103,7 +103,7 @@ function App() {
           value={env}
           onChange={(e) => setEnv(e.target.value)}
         >
-          {["dev", "qa-v2", "staging"].map((envOption) => (
+          {["dev", "qa-v2", "staging", "prod-v2"].map((envOption) => (
             <option key={envOption} value={envOption}>
               {envOption}
             </option>
