@@ -8,7 +8,6 @@ import GameAnimation from "./pages/GameAnimation";
 import BackgroundCurve from "./pages/BackgroundCurve";
 import { NavBar } from "./components/nav-bar";
 import Acernity from "./pages/Acernity";
-import ParallaxPage from "./pages/Parallax";
 import MotionPage from "./pages/Motion";
 import LinearModelPage from "./pages/LinearModel";
 import MixBlendModePage from "./pages/learning-fe/mix-blend-mode";
@@ -23,7 +22,6 @@ createRoot(document.getElementById("root")!).render(
           <Route path="game-animation" element={<GameAnimation />} />
           <Route path="bg-curve" element={<BackgroundCurve />} />
           <Route path="acernity" element={<Acernity />} />
-          <Route path="parallax" element={<ParallaxPage />} />
           <Route path="motion" element={<MotionPage />} />
           <Route path="linear-model" element={<LinearModelPage />} />
           <Route path="mix-blend-mode" element={<MixBlendModePage />} />
